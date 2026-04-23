@@ -45,40 +45,9 @@ int main() {
         return 1;
     }
 
-    t_file << "Size;StdSort;HeapSort;InsertionSort;ShakerSort\n";
-
-    for (long size : sizes) {
-        std::cout << "Тестируется выборка размером " << size << "\n";
-        if (size > original_data.size()) {
-            continue;
-        }
-
-        std::vector<Resident> slice(original_data.begin(), original_data.begin() + size);
-
-        auto data_std = slice;
-        auto data_heap = slice;
-        auto data_insertion = slice;
-        auto data_shaker = slice;
-
-        long long time_std = measure_time([](std::vector<Resident>& arr) { std::sort(arr.begin(), arr.end()); }, data_std);
-        long long time_heap = measure_time([](std::vector<Resident>& arr) { heap_sort(arr); }, data_heap);
-        long long time_insertion = measure_time([](std::vector<Resident>& arr) { insertion_sort(arr); }, data_insertion);
-        long long time_shaker = measure_time([](std::vector<Resident>& arr) { shaker_sort(arr); }, data_shaker);
-
-        t_file << size << ";" 
-               << time_std << ";" 
-               << time_heap << ";" 
-               << time_insertion << ";" 
-               << time_shaker << "\n";
-    }
-
-    std::string out_file = "../data/out_data.csv";
-    std::vector<Resident> final_data = original_data;
-    std::sort(final_data.begin(), final_data.end());
-
-    std::cout << "Записываем данные в " << out_file << "\n";
-    write_csv(out_file, final_data);
-    std::cout << "Успешно записано\n";
+    // std::cout << "Записываем данные в " << out_file << "\n";
+    // write_csv(out_file, final_data);
+    // std::cout << "Успешно записано\n";
 
     return 0;
 }
