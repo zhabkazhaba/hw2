@@ -19,11 +19,19 @@ namespace rbtree {
             color(color), data(data), parent(parent), left(left), right(right) {}
     };
 
+    /**
+    * @brief Класс, реализующий RB дерево
+    * 
+    * Все функции написаны в соответствии с алгоритмами из книги Кормена
+    */
     class RBTree {
         private:
         tnode* root;
         tnode* Tnil;
 
+        /**
+        * @brief Операция Left-Rotate
+        */
         void leftRotate(tnode* x) {
             tnode* y = x->right;
             x->right = y->left;
@@ -45,6 +53,9 @@ namespace rbtree {
             x->parent = y;
         }
 
+        /**
+        * @brief Операция Right-Rotate
+        */
         void rightRotate(tnode* x) {
             tnode* y = x->left;
             x->left = y->right;
@@ -66,6 +77,9 @@ namespace rbtree {
             x->parent = y;
         }
 
+        /**
+        * @brief Исправление КБ дерева после вставки узла
+        */
         void RBInsertFixup(tnode* input) {
             tnode* y;
 
@@ -119,6 +133,9 @@ namespace rbtree {
             }
         }
 
+        /**
+        * @brief Вспомогательная функция для поиска по RB дереву
+        */
         void searchLoop(tnode* node, const std::string& key, std::vector<Resident>& result) {
             if (node == Tnil) {
                 return;
@@ -147,6 +164,9 @@ namespace rbtree {
             delete Tnil;
         }
 
+        /**
+        * @brief Функция для вставки узла в RB дерево
+        */
         void RBInsert(const Resident& data) {
             tnode* input = new tnode(Color::RED, data, nullptr, Tnil, Tnil);
 
@@ -179,6 +199,9 @@ namespace rbtree {
             RBInsertFixup(input);
         }
 
+        /**
+        * @brief Функция для поиска по RB дереву
+        */
         std::vector<Resident> search(const std::string& key) {
             std::vector<Resident> result;
 

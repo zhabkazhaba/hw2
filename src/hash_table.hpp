@@ -5,12 +5,21 @@
 #include <list>
 
 namespace htable {
+    /**
+    * @brief Класс, реализующий хэш-таблицу
+    * 
+    * В качестве хэш-функции используется RSHash и для разрешения коллизий - метод цепочки
+    */
     class HashTable {
         private:
         std::vector<std::list<Resident>> table;
         int capacity;
         int coll_count;
 
+        /**
+        * @brief Вычисление хэша
+        * Используется алгоритм RSHash
+        */
         unsigned int RSHash(const std::string& key) {
             unsigned int b = 378551;
 	        unsigned int a = 63689;
@@ -30,6 +39,9 @@ namespace htable {
             table.resize(size);
         }
 
+        /**
+        * @brief Вставка в хэш-таблицу
+        */
         void insert (const Resident& input) {
             unsigned int index = RSHash(input.street) % capacity;
 
@@ -40,6 +52,9 @@ namespace htable {
             table[index].push_back(input);
         }
 
+        /**
+        * @brief Поиск по хэш-таблице
+        */
         std::vector<Resident> search(const std::string& key) {
             std::vector<Resident> result;
             unsigned int index = RSHash(key) % capacity;

@@ -1,0 +1,24 @@
+\doxysection{linear.\+hpp}
+\hypertarget{linear_8hpp_source}{}\label{linear_8hpp_source}\index{src/linear.hpp@{src/linear.hpp}}
+\doxymbox{\hyperlink{linear_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00011\ std::vector<T>\ \doxymbox{\hyperlink{linear_8hpp_a7317ea0f1ba347bfc855aa4da8cdb538}{linear\_search}}(\textcolor{keyword}{const}\ std::vector<T>\&\ input,\ \textcolor{keyword}{const}\ std::string\&\ key)\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ std::vector<T>\ output;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ item\ :\ input)\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (item.street\ ==\ key)\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ output.push\_back(item);}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00018\ \ \ \ \ \}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordflow}{return}\ output;}
+\DoxyCodeLine{00021\ \}}
+
+\end{DoxyCode}

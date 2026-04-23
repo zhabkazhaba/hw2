@@ -1,0 +1,50 @@
+\doxysection{binary\+\_\+tree.\+hpp}
+\hypertarget{binary__tree_8hpp_source}{}\label{binary__tree_8hpp_source}\index{src/binary\_tree.hpp@{src/binary\_tree.hpp}}
+\doxymbox{\hyperlink{binary__tree_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{resident_8hpp}{resident.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacebtree}{btree}}\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structbtree_1_1tnode_a8c2489726a22d98334518d98967febbd}{tnode}}\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_resident}{Resident}}\ \doxymbox{\hyperlink{structbtree_1_1tnode_a546349205f2e12d3a2a09ab62a987e78}{data}};}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structbtree_1_1tnode_a8c2489726a22d98334518d98967febbd}{tnode}}*\ \doxymbox{\hyperlink{structbtree_1_1tnode_a83d26e79a1f775eb46c692d7d97c512b}{left}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structbtree_1_1tnode_a8c2489726a22d98334518d98967febbd}{tnode}}*\ \doxymbox{\hyperlink{structbtree_1_1tnode_a39dd3f950f0c098e7e0c885526602dde}{right}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structbtree_1_1tnode_a8c2489726a22d98334518d98967febbd}{tnode}}(\doxymbox{\hyperlink{struct_resident}{Resident}}\ res)\ :\ \doxymbox{\hyperlink{structbtree_1_1tnode_a546349205f2e12d3a2a09ab62a987e78}{data}}(res)\ \{\}}
+\DoxyCodeLine{00013\ \ \ \ \ \};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00018\ \ \ \ \ \doxymbox{\hyperlink{structbtree_1_1tnode}{tnode}}*\ \doxymbox{\hyperlink{namespacebtree_a73c658554f9415fcfa69debc76ce83f5}{buildTree}}(\textcolor{keyword}{const}\ std::vector<Resident>\&\ input,\ \textcolor{keywordtype}{int}\ start,\ \textcolor{keywordtype}{int}\ end)\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (start\ >\ end)\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ mid\ =\ start\ +\ (end\ -\/\ start)\ /\ 2;}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structbtree_1_1tnode}{tnode}}*\ root\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{structbtree_1_1tnode}{tnode}}(input[mid]);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ root-\/>left\ =\ \doxymbox{\hyperlink{namespacebtree_a73c658554f9415fcfa69debc76ce83f5}{buildTree}}(input,\ start,\ mid\ -\/\ 1);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ root-\/>right\ =\ \doxymbox{\hyperlink{namespacebtree_a73c658554f9415fcfa69debc76ce83f5}{buildTree}}(input,\ mid\ +1,\ end);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ root;}
+\DoxyCodeLine{00030\ \ \ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacebtree_a1d8e8da254ed2088c1836f5e370022a4}{search}}(\doxymbox{\hyperlink{structbtree_1_1tnode}{btree::tnode}}*\ root,\ \textcolor{keyword}{const}\ std::string\&\ key,\ std::vector<Resident>\&\ output)\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (root\ ==\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (root-\/>\doxymbox{\hyperlink{structbtree_1_1tnode_a546349205f2e12d3a2a09ab62a987e78}{data}}.\doxymbox{\hyperlink{struct_resident_add5f0908a1d8fe2abca58677a511c490}{street}}\ ==\ key)\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ output.push\_back(root-\/>\doxymbox{\hyperlink{structbtree_1_1tnode_a546349205f2e12d3a2a09ab62a987e78}{data}});}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacebtree_a1d8e8da254ed2088c1836f5e370022a4}{search}}(root-\/>\doxymbox{\hyperlink{structbtree_1_1tnode_a83d26e79a1f775eb46c692d7d97c512b}{left}},\ key,\ output);}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacebtree_a1d8e8da254ed2088c1836f5e370022a4}{search}}(root-\/>\doxymbox{\hyperlink{structbtree_1_1tnode_a39dd3f950f0c098e7e0c885526602dde}{right}},\ key,\ output);}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (key\ <\ root-\/>data.street)\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacebtree_a1d8e8da254ed2088c1836f5e370022a4}{search}}(root-\/>\doxymbox{\hyperlink{structbtree_1_1tnode_a83d26e79a1f775eb46c692d7d97c512b}{left}},\ key,\ output);}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacebtree_a1d8e8da254ed2088c1836f5e370022a4}{search}}(root-\/>\doxymbox{\hyperlink{structbtree_1_1tnode_a39dd3f950f0c098e7e0c885526602dde}{right}},\ key,\ output);}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00049\ \ \ \ \ \}}
+\DoxyCodeLine{00050\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,74 @@
+\doxysection{htable::\+Hash\+Table Class Reference}
+\hypertarget{classhtable_1_1_hash_table}{}\label{classhtable_1_1_hash_table}\index{htable::HashTable@{htable::HashTable}}
+
+
+Класс, реализующий хэш-\/таблицу  
+
+
+
+
+{\ttfamily \+\#include $<$hash\+\_\+table.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classhtable_1_1_hash_table_aa82b36dd2f7388802ee41719cbc243d0}{Hash\+Table}} (long size)
+\item 
+void \doxymbox{\hyperlink{classhtable_1_1_hash_table_a1a94b70544c7c1c9abee0f2801002392}{insert}} (const \doxymbox{\hyperlink{struct_resident}{Resident}} \&input)
+\begin{DoxyCompactList}\small\item\em Вставка в хэш-\/таблицу \end{DoxyCompactList}\item 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_resident}{Resident}} $>$ \doxymbox{\hyperlink{classhtable_1_1_hash_table_a12fe9e90ea058b0b92a27bfd1a18ab20}{search}} (const std::\+string \&key)
+\begin{DoxyCompactList}\small\item\em Поиск по хэш-\/таблице \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{classhtable_1_1_hash_table_a2d5a3cff026df8e0c4871e9e283e26e0}{get\+Collisions}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс, реализующий хэш-\/таблицу 
+
+В качестве хэш-\/функции используется RSHash и для разрешения коллизий -\/ метод цепочки 
+
+\label{doc-constructors}
+\Hypertarget{classhtable_1_1_hash_table_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classhtable_1_1_hash_table_aa82b36dd2f7388802ee41719cbc243d0}\index{htable::HashTable@{htable::HashTable}!HashTable@{HashTable}}
+\index{HashTable@{HashTable}!htable::HashTable@{htable::HashTable}}
+\doxysubsubsection{\texorpdfstring{HashTable()}{HashTable()}}
+{\footnotesize\ttfamily \label{classhtable_1_1_hash_table_aa82b36dd2f7388802ee41719cbc243d0} 
+htable::\+\+Hash\+Table::\+\+Hash\+Table (\begin{DoxyParamCaption}\item[{long}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classhtable_1_1_hash_table_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classhtable_1_1_hash_table_a2d5a3cff026df8e0c4871e9e283e26e0}\index{htable::HashTable@{htable::HashTable}!getCollisions@{getCollisions}}
+\index{getCollisions@{getCollisions}!htable::HashTable@{htable::HashTable}}
+\doxysubsubsection{\texorpdfstring{getCollisions()}{getCollisions()}}
+{\footnotesize\ttfamily \label{classhtable_1_1_hash_table_a2d5a3cff026df8e0c4871e9e283e26e0} 
+int htable::\+\+Hash\+Table::\+get\+Collisions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classhtable_1_1_hash_table_a1a94b70544c7c1c9abee0f2801002392}\index{htable::HashTable@{htable::HashTable}!insert@{insert}}
+\index{insert@{insert}!htable::HashTable@{htable::HashTable}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily \label{classhtable_1_1_hash_table_a1a94b70544c7c1c9abee0f2801002392} 
+void htable::\+\+Hash\+Table::\+insert (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_resident}{Resident}} \&}]{input}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Вставка в хэш-\/таблицу 
+
+\Hypertarget{classhtable_1_1_hash_table_a12fe9e90ea058b0b92a27bfd1a18ab20}\index{htable::HashTable@{htable::HashTable}!search@{search}}
+\index{search@{search}!htable::HashTable@{htable::HashTable}}
+\doxysubsubsection{\texorpdfstring{search()}{search()}}
+{\footnotesize\ttfamily \label{classhtable_1_1_hash_table_a12fe9e90ea058b0b92a27bfd1a18ab20} 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_resident}{Resident}} $>$ htable::\+\+Hash\+Table::\+search (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Поиск по хэш-\/таблице 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+src/\+\doxymbox{\hyperlink{hash__table_8hpp}{hash\+\_\+table.\+hpp}}\end{DoxyCompactItemize}

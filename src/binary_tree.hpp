@@ -12,7 +12,9 @@ namespace btree {
         tnode(Resident res) : data(res) {}
     };
 
-
+    /**
+     * @brief Построение бинарного дерева
+     */
     tnode* buildTree(const std::vector<Resident>& input, int start, int end) {
         if (start > end) {
             return nullptr;
@@ -27,6 +29,9 @@ namespace btree {
         return root;
     }
 
+    /**
+     * @brief Поиск по бинарному дереву
+     */
     void search(btree::tnode* root, const std::string& key, std::vector<Resident>& output) {
         if (root == nullptr) {
             return;

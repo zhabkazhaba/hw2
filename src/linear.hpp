@@ -4,7 +4,9 @@
 #include <string>
 #include <utility>
 
-
+/**
+* @brief Линейный поиск
+*/
 template <typename T>
 std::vector<T> linear_search(const std::vector<T>& input, const std::string& key) {
     std::vector<T> output;
