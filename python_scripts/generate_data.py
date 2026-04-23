@@ -29,7 +29,7 @@ def main():
 
     while len(unique_records) < n:
         fio = random.choice(FIO_LIST)
-        street = random.choice(STREET_LIST)
+        street = random.choice(STREET_LIST) + " " + str(random.randint(0,20000))
         house = random.randint(1, 100)
         apartment = random.randint(1, 1000)
         birth_year = random.randint(1900, 2026)

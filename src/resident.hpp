@@ -8,8 +8,8 @@
  * Используется для последующих сортировок
  */
 struct Resident {
-    std::string fio;        ///< ФИО жильца 
     std::string street;     ///< Название улицы 
+    std::string fio;        ///< ФИО жильца 
     int house;              ///< Номер дома 
     int apartment;          ///< Номер квартиры 
     int birth_year;         ///< Год рождения 

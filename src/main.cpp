@@ -3,21 +3,18 @@
 #include <chrono>
 #include <algorithm>
 #include <fstream>
+#include <random>
+#include <map>
 #include "resident.hpp"
-#include "sort.hpp"
+#include "linear.hpp"
+#include "binary_tree.hpp"
+#include "rb_tree.hpp"
+#include "hash_table.hpp"
 #include "util.hpp"
 
 #ifdef _WIN32
 #include <windows.h>
 #endif
-
-template <typename Func>
-long long measure_time(Func f, std::vector<Resident>& data) {
-    auto start = std::chrono::high_resolution_clock::now();
-    f(data);
-    auto end = std::chrono::high_resolution_clock::now();
-    return std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-}
 
 int main() {
     #ifdef _WIN32
@@ -30,14 +27,14 @@ int main() {
 
     std::cout << "Читаем данные из " << in_file << "\n";
     std::vector<Resident> original_data = read_csv(in_file);
-    std::cout << "Успешно прочитано\n";
+    std::cout << "Успешно прочитано " << original_data.size() << "\n";
 
     if (original_data.empty()) {
         std::cerr << "Датасет пуст\n";
         return 1;
     }
 
-    std::vector<int> sizes = {100, 500, 1000, 2500, 5000, 10000, 25000, 50000, 75000, 100000};
+    std::vector<int> sizes = {100, 500, 1000, 2500, 5000, 10000, 25000, 50000, 75000, 100000, 1000000};
 
     std::ofstream t_file(times_file);
     if (!t_file.is_open()) {
@@ -45,9 +42,107 @@ int main() {
         return 1;
     }
 
-    // std::cout << "Записываем данные в " << out_file << "\n";
-    // write_csv(out_file, final_data);
-    // std::cout << "Успешно записано\n";
+    t_file << "Size;Linear;BT;RBT;Hash;MultiMap;HashCollisions\n";
 
+    std::mt19937 rng(111);
+
+for (int size : sizes) {
+        if (size > original_data.size()) {
+            continue;
+        }
+
+        std::cout << "Размер: " << size << "\n";
+
+        // Подготовка данных
+        std::vector<Resident> slice(original_data.begin(), original_data.begin() + size);
+        
+        std::vector<Resident> sorted_slice = slice;
+        std::sort(sorted_slice.begin(), sorted_slice.end());
+
+        // Выбор улиц
+        std::vector<std::string> search_keys;
+        std::uniform_int_distribution<int> dist(0, size - 1);
+        for (int i = 0; i < 100; ++i) {
+            search_keys.push_back(slice[dist(rng)].street);
+        }
+
+        // Создание нужных структур
+        // Бинарное дерево поиска
+        btree::tnode* bt_root = btree::buildTree(sorted_slice, 0, size - 1);
+
+        // Красно-черное дерево
+        rbtree::RBTree rb_tree;
+        for (const auto& res : slice) {
+            rb_tree.RBInsert(res);
+        }
+
+        // Хэш-таблица
+        htable::HashTable hash_table(size / 2 > 0 ? size / 2 : 10);
+        for (const auto& res : slice) {
+            hash_table.insert(res);
+        }
+
+        // std::multimap
+        std::multimap<std::string, Resident> mmap;
+        for (const auto& res : slice) {
+            mmap.insert({res.street, res});
+        }
+
+        // Замеряем время
+        long long time_linear = 0, time_bt = 0, time_rbt = 0, time_hash = 0, time_map = 0;
+
+        auto start = std::chrono::high_resolution_clock::now();
+        for (const auto& key : search_keys) {
+            auto res = linear_search(slice, key); 
+        }
+        auto end = std::chrono::high_resolution_clock::now();
+        time_linear = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+
+        start = std::chrono::high_resolution_clock::now();
+        for (const auto& key : search_keys) {
+            std::vector<Resident> res;
+            btree::search(bt_root, key, res); 
+        }
+        end = std::chrono::high_resolution_clock::now();
+        time_bt = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+
+        start = std::chrono::high_resolution_clock::now();
+        for (const auto& key : search_keys) {
+            auto res = rb_tree.search(key);
+        }
+        end = std::chrono::high_resolution_clock::now();
+        time_rbt = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+
+        start = std::chrono::high_resolution_clock::now();
+        for (const auto& key : search_keys) {
+            auto res = hash_table.search(key);
+        }
+        end = std::chrono::high_resolution_clock::now();
+        time_hash = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+
+        start = std::chrono::high_resolution_clock::now();
+        for (const auto& key : search_keys) {
+            auto range = mmap.equal_range(key);
+            std::vector<Resident> res;
+            for (auto it = range.first; it != range.second; ++it) {
+                res.push_back(it->second);
+            }
+        }
+        end = std::chrono::high_resolution_clock::now();
+        time_map = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+
+        // Записываем результаты
+        int collisions = hash_table.getCollisions();
+        
+        t_file << size << ";" 
+               << time_linear << ";" 
+               << time_bt << ";" 
+               << time_rbt << ";" 
+               << time_hash << ";" 
+               << time_map << ";" 
+               << collisions << "\n";
+    }
+
+    std::cout << "Конец замеров\n";
     return 0;
 }
